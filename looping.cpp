@@ -243,8 +243,8 @@ void apply_rotational_offsets(
 //--------------------------------------
 
 vec3 decayed_offset(
-    vec3 x, // Initial Position
-    vec3 v, // Initial Velocity
+    const vec3 x, // Initial Position
+    const vec3 v, // Initial Velocity
     const float halflife, 
     const float dt)
 {
@@ -334,8 +334,8 @@ void compute_inertialize_both_offsets(
 //--------------------------------------
 
 vec3 decayed_offset_cubic(
-    vec3 x, // Initial Position
-    vec3 v, // Initial Velocity
+    const vec3 x, // Initial Position
+    const vec3 v, // Initial Velocity
     const float blendtime, 
     const float dt)
 {
@@ -382,7 +382,7 @@ void compute_inertialize_cubic_offsets(
 //--------------------------------------
 
 vec3 decayed_velocity_offset(
-    vec3 v, // Initial Velocity
+    const vec3 v, // Initial Velocity
     const float halflife, 
     const float dt)
 {
@@ -391,7 +391,7 @@ vec3 decayed_velocity_offset(
 }
 
 vec3 decayed_velocity_offset_cubic(
-    vec3 v, // Initial Velocity 
+    const vec3 v, // Initial Velocity 
     const float blendtime, 
     const float dt)
 {
@@ -463,14 +463,14 @@ void compute_linear_inertialize_offsets(
 
 //--------------------------------------
 
-float softfade(float x, float alpha=1.0f)
+float softfade(const float x, const float alpha)
 {
     return logf(1.0f + expf(alpha - 2.0f*alpha*x)) / alpha;
 }
 
 // Function using `softfade` to decay some offset
 vec3 decayed_offset_softfade(
-    vec3 x, // Initial Position
+    const vec3 x, // Initial Position
     const float duration,
     const float hardness,
     const float dt)
@@ -479,7 +479,7 @@ vec3 decayed_offset_softfade(
 }
 
 // Gradient of the `softfade` function at zero
-float softfade_grad_zero(float alpha=1.0f)
+float softfade_grad_zero(const float alpha)
 {
     return (-2.0f * expf(alpha)) / (1.0f + expf(alpha));
 }
@@ -487,7 +487,7 @@ float softfade_grad_zero(float alpha=1.0f)
 // Gradient of the `decayed_offset_softfade` 
 // function with a `dt` of zero
 vec3 decayed_offset_softfade_grad_zero(
-    vec3 x,
+    const vec3 x,
     const float duration,
     const float hardness)
 {
@@ -785,20 +785,20 @@ static inline void loop_animation(
     slice2d<vec3> offset_bone_rotations,
     const slice2d<vec3> raw_bone_positions,
     const slice2d<quat> raw_bone_rotations,
-    int loop_mode,
-    float halflife_start,
-    float halflife_end,
-    float blendtime_start,
-    float blendtime_end,
-    float ratio,
-    float softfade_duration_start,
-    float softfade_duration_end,
-    float softfade_hardness_start,
-    float softfade_hardness_end,
-    float root_blendtime_start,
-    float root_blendtime_end,
-    bool inertialize_root,
-    float dt)
+    const int loop_mode,
+    const float halflife_start,
+    const float halflife_end,
+    const float blendtime_start,
+    const float blendtime_end,
+    const float ratio,
+    const float softfade_duration_start,
+    const float softfade_duration_end,
+    const float softfade_hardness_start,
+    const float softfade_hardness_end,
+    const float root_blendtime_start,
+    const float root_blendtime_end,
+    const bool inertialize_root,
+    const float dt)
 {    
     array1d<vec3> pos_diff(raw_bone_positions.cols);
     array1d<vec3> vel_diff(raw_bone_positions.cols);
