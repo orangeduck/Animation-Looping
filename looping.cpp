@@ -337,9 +337,10 @@ vec3 decayed_offset_cubic(
     const vec3 x, // Initial Position
     const vec3 v, // Initial Velocity
     const float blendtime, 
-    const float dt)
+    const float dt,
+    const float eps=1e-8)
 {
-    float t = clampf(dt / blendtime, 0, 1);
+    float t = clampf(dt / (blendtime + eps), 0, 1);
 
     vec3 d = x;
     vec3 c = v * blendtime;
@@ -393,9 +394,10 @@ vec3 decayed_velocity_offset(
 vec3 decayed_velocity_offset_cubic(
     const vec3 v, // Initial Velocity 
     const float blendtime, 
-    const float dt)
+    const float dt,
+    const float eps=1e-8f)
 {
-    float t = clampf(dt / blendtime, 0, 1);
+    float t = clampf(dt / (blendtime + eps), 0, 1);
 
     vec3 c = v * blendtime;
     vec3 b = -2*c;
