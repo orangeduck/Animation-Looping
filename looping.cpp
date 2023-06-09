@@ -133,8 +133,6 @@ void orbit_camera_update(
 
     cam.target = (Vector3){ target.x, target.y, target.z };
     cam.position = (Vector3){ eye.x, eye.y, eye.z };
-    
-    UpdateCamera(&cam);
 }
 
 //--------------------------------------
@@ -1315,11 +1313,11 @@ int main(void)
             paused = !paused;
         }
         
-        playrate = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 1020, ui_playback_hei +  40, 140, 20 }, 
             "Playrate",
             TextFormat("%7.2f", playrate),
-            playrate,
+            &playrate,
             0.0f,
             2.0f);
         
@@ -1365,76 +1363,76 @@ int main(void)
         
         GuiGroupBox((Rectangle){ 20, 20, 310, 400 }, "Looping Methods");
         
-        halflife_start = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 30, 120, 20 }, 
             "halflife start", 
             TextFormat("%5.3f", halflife_start), 
-            halflife_start, 0.0f, 0.2f);
+            &halflife_start, 0.0f, 0.2f);
             
-        halflife_end = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 60, 120, 20 }, 
             "halflife end", 
             TextFormat("%5.3f", halflife_end), 
-            halflife_end, 0.0f, 0.2f);
+            &halflife_end, 0.0f, 0.2f);
         
-        blendtime_start = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 90, 120, 20 }, 
             "blend time start", 
             TextFormat("%5.3f", blendtime_start), 
-            blendtime_start, 0.01f, 1.0f);
+            &blendtime_start, 0.01f, 1.0f);
             
-        blendtime_end = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 120, 120, 20 }, 
             "blend time end", 
             TextFormat("%5.3f", blendtime_end), 
-            blendtime_end, 0.01f, 1.0f);
+            &blendtime_end, 0.01f, 1.0f);
         
-        ratio = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 150, 120, 20 }, 
             "ratio", 
             TextFormat("%5.3f", ratio), 
-            ratio, 0.0f, 1.0f);
+            &ratio, 0.0f, 1.0f);
         
-        softfade_duration_start = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 180, 120, 20 }, 
             "softfade duration start", 
             TextFormat("%5.3f", softfade_duration_start), 
-            softfade_duration_start, 0.01f, 1.0f);
+            &softfade_duration_start, 0.01f, 1.0f);
             
-        softfade_duration_end = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 210, 120, 20 }, 
             "softfade duration end", 
             TextFormat("%5.3f", softfade_duration_end), 
-            softfade_duration_end, 0.01f, 1.0f);
+            &softfade_duration_end, 0.01f, 1.0f);
         
-        softfade_hardness_start = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 240, 120, 20 }, 
             "softfade hardness start", 
             TextFormat("%5.3f", softfade_hardness_start), 
-            softfade_hardness_start, 1.0f, 50.0f);
+            &softfade_hardness_start, 1.0f, 50.0f);
         
-        softfade_hardness_end = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 270, 120, 20 }, 
             "softfade hardness end", 
             TextFormat("%5.3f", softfade_hardness_end), 
-            softfade_hardness_end, 1.0f, 50.0f);
+            &softfade_hardness_end, 1.0f, 50.0f);
         
-        inertialize_root = GuiCheckBox(
+        GuiCheckBox(
             (Rectangle){ 170, 300, 20, 20 }, 
             "inertialize root",
-            inertialize_root);
+            &inertialize_root);
         
-        root_blendtime_start = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 330, 120, 20 }, 
             "root blend time start", 
             TextFormat("%5.3f", root_blendtime_start), 
-            root_blendtime_start, 0.01f, 1.0f);
+            &root_blendtime_start, 0.01f, 1.0f);
             
-        root_blendtime_end = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 170, 360, 120, 20 }, 
             "root blend time end", 
             TextFormat("%5.3f", root_blendtime_end), 
-            root_blendtime_end, 0.01f, 1.0f);
+            &root_blendtime_end, 0.01f, 1.0f);
         
         if (GuiDropdownBox(
             (Rectangle){ 170, 390, 120, 20 }, 
@@ -1453,11 +1451,11 @@ int main(void)
         
         GuiGroupBox((Rectangle){ 20, ui_hei_anim, 1240, 40 }, "animation");
 
-        time = GuiSliderBar(
+        GuiSliderBar(
             (Rectangle){ 80, ui_hei_anim + 10, 1100, 20 }, 
             "time", 
             TextFormat("%5.3f (%i)", time, start_frame + (int)(time / dt)),
-            time,
+            &time,
             0.0f, (looped_bone_positions.rows - 1) * dt);
         
         //---------
